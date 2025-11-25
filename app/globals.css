@@ -1,26 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Source+Serif+Pro:wght@400;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Field Notes Color Palette */
+  --parchment: #f6f1e7;
+  --dark-ink: #2b2724;
+  --sepia: #c8a878;
+  --botanical-green: #7f8d72;
+  --charcoal: #3a3734;
+  
+  /* Font families */
+  --font-eb-garamond: 'EB Garamond', serif;
+  --font-source-serif: 'Source Serif Pro', serif;
+  --font-dancing-script: 'Dancing Script', cursive;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-parchment: var(--parchment);
+  --color-dark-ink: var(--dark-ink);
+  --color-sepia: var(--sepia);
+  --color-botanical-green: var(--botanical-green);
+  --color-charcoal: var(--charcoal);
+  
+  --font-serif: var(--font-eb-garamond);
+  --font-body: var(--font-source-serif);
+  --font-accent: var(--font-dancing-script);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Utility classes for custom colors */
+.bg-parchment { background-color: var(--parchment); }
+.text-dark-ink { color: var(--dark-ink); }
+.text-sepia { color: var(--sepia); }
+.text-botanical-green { color: var(--botanical-green); }
+.bg-charcoal { background-color: var(--charcoal); }
+.border-sepia { border-color: var(--sepia); }
+.bg-sepia { background-color: var(--sepia); }
 
+/* Paper texture background using CSS */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--parchment);
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(43, 39, 36, 0.03) 1px, transparent 0),
+    linear-gradient(180deg, rgba(200, 168, 120, 0.02) 0%, transparent 50%);
+  background-size: 20px 20px, 100% 100%;
+  color: var(--dark-ink);
+  font-family: var(--font-source-serif), Georgia, serif;
+  min-height: 100vh;
+}
+
+/* Watercolor wash effect */
+.watercolor-wash {
+  background: linear-gradient(
+    135deg,
+    rgba(200, 168, 120, 0.15) 0%,
+    rgba(127, 141, 114, 0.1) 50%,
+    rgba(200, 168, 120, 0.08) 100%
+  );
+  background-blend-mode: multiply;
+  position: relative;
+}
+
+.watercolor-wash::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 140%;
+  height: 200%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(200, 168, 120, 0.2) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Journal card styling */
+.journal-card {
+  background: var(--parchment);
+  border: 1px solid rgba(200, 168, 120, 0.3);
+  box-shadow: 
+    0 2px 8px rgba(43, 39, 36, 0.08),
+    0 1px 2px rgba(43, 39, 36, 0.04);
+  transition: all 0.3s ease;
+}
+
+.journal-card:hover {
+  box-shadow: 
+    0 8px 24px rgba(43, 39, 36, 0.12),
+    0 4px 8px rgba(43, 39, 36, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Drop cap for first paragraph */
+.drop-cap > p:first-of-type::first-letter {
+  float: left;
+  font-size: 4.5rem;
+  line-height: 0.8;
+  padding-right: 0.5rem;
+  padding-top: 0.2rem;
+  font-family: var(--font-eb-garamond);
+  color: var(--sepia);
 }

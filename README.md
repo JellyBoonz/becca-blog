@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Field Notes Blog
+
+A beautiful, journal-inspired blog built with Next.js 14, featuring a Field Notes aesthetic with warm parchment backgrounds, botanical accents, and elegant typography.
+
+## Features
+
+- **Field Notes Design**: Soft, journal-like aesthetic with paper textures and botanical illustrations
+- **Simple Publishing**: Upload .docx files from Google Docs through an easy admin interface
+- **MDX Support**: Blog posts written in Markdown with frontmatter support
+- **GitHub Integration**: Posts are automatically committed to your GitHub repository
+- **Beautiful Typography**: EB Garamond for headers, Source Serif Pro for body text
+- **Responsive Design**: Works beautifully on all devices
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
+- A GitHub account and repository for storing posts
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd becca-blog
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+Create a `.env.local` file in the root directory:
+```env
+GITHUB_TOKEN=your_github_token_here
+GITHUB_REPO_OWNER=your_username_here
+GITHUB_REPO_NAME=your_repo_name_here
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To get a GitHub token:
+- Go to https://github.com/settings/tokens
+- Generate a new token with `repo` scope (for private repos) or `public_repo` scope (for public repos)
 
-## Learn More
+4. Run the development server:
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) to see your blog.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Publishing Posts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Write your post in Google Docs
+2. Download it as a .docx file (File → Download → Microsoft Word (.docx))
+3. Visit `/admin` on your blog
+4. Enter the post title and upload the .docx file
+5. Click "Publish Post"
 
-## Deploy on Vercel
+The post will be automatically:
+- Converted from .docx to Markdown
+- Added to your GitHub repository in the `posts/` directory
+- Available on your blog immediately
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+├── app/
+│   ├── admin/          # Admin upload page
+│   ├── api/
+│   │   └── upload-docx/ # API route for processing uploads
+│   ├── posts/
+│   │   └── [slug]/     # Individual post pages
+│   ├── layout.tsx      # Root layout
+│   └── page.tsx        # Homepage
+├── components/         # React components
+├── lib/               # Utility functions
+├── posts/             # MDX blog posts (committed to GitHub)
+└── public/            # Static assets
+```
+
+## Deployment
+
+### Deploy to Vercel
+
+1. Push your code to GitHub
+2. Import your repository on [Vercel](https://vercel.com)
+3. Add environment variables in Vercel dashboard:
+   - `GITHUB_TOKEN`
+   - `GITHUB_REPO_OWNER`
+   - `GITHUB_REPO_NAME`
+4. Deploy!
+
+The blog will automatically rebuild when new posts are committed to your GitHub repository.
+
+## Tech Stack
+
+- **Next.js 14** (App Router)
+- **TypeScript**
+- **Tailwind CSS**
+- **MDX** (next-mdx-remote)
+- **Mammoth** (docx to Markdown conversion)
+- **Octokit** (GitHub API)
+- **Google Fonts** (EB Garamond, Source Serif Pro, Dancing Script)
+
+## License
+
+Private project - All rights reserved.
